@@ -1,15 +1,23 @@
 ### 前言
 
 大家都知道go没有一个自己的包管理平台。社区里go的第三方包托管在各个git托管平台。需要用到包时通过go get 命令工具安装，但这个工具没有版本描述性文件，在go的世界里没有“package.json”这种文件。这个给我们带来直接的影响就是依赖放在外网，而且没有版本约束，这个月下的版本，可能下个月更新了。有道是“工欲善其事，必先利其器”，这个时候我们就需要一个依赖管理工具。
-目前依赖工具有很多，如：glide、godep等。今天主要讲是官方出品的dep,注意它和godep不是一个东西。
+目前依赖工具有很多，如：**glide**、**godep**等。今天主要讲是官方出品的**dep**,注意它和**godep**不是一个东西。
 github地址不同
-godep :https://github.com/tools/godep
-dep:https://github.com/golang/dep
-按照Peter Bourgon博文来说，它们的作者都有相同的人，但是一个是dep是官方版本，godep是第三方工具。
-选择dep有什么好处呢？
-1、官方出的，不用担心更新维护问题。
-2、相对来说，比其他第三方工具兼容问题要好。
-还有等用过以后再补。
+
+-   **godep :   https://github.com/tools/godep**
+
+-   **dep:   https://github.com/golang/dep**
+
+按照**Peter Bourgon**博文来说，它们的作者都有相同的人，但是一个是**dep**是官方版本，**godep**是第三方工具。
+
+<div>
+<font color="#0000FF">选择dep有什么好处呢？</font>
+<p style="color: #FF7F50">1、官方出的，不用担心更新维护问题。</p>
+<p style="color: #FF7F50">2、相对来说，比其他第三方工具兼容问题要好。
+还有等用过以后再补。</p>
+</div>
+
+
 
 ### 环境要求
 
