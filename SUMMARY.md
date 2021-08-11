@@ -22,3 +22,8 @@
 ## python
 * [wav 音频分割](./python/audio-wav-slice-by-pydub.md)
 * [读取 .cfg配置文件](./python/read-cfg-file-by-configparser.md)
+* [sched 定时任务](./python/sched-timed-task.md)
+
+
+## 运维
+* [Kubernetes](./OperationMaintenance/kubernetes.md)
