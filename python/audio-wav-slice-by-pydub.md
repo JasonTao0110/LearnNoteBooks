@@ -1,10 +1,9 @@
+# wav 音频分割
 
-### wav 音频文件分割
+## 环境
 
-#### 环境
-- ffmpeg 环境
-- pydub 包  `pip install pydub`
-
+* ffmpeg 环境
+* pydub 包  `pip install pydub`
 
 ```python
 from pydub import AudioSegment
@@ -34,7 +33,5 @@ if __name__ == '__main__':
     s = 0
     e = 5.33333
     get_second_part_wav(wav_path, s, e, part_path)
-
-
-
 ```
+

@@ -47,7 +47,8 @@ go get -u github.com/gofiber/fiber
 
 这些测试由[TechEmpower](https://github.com/TechEmpower/FrameworkBenchmarks)和[Go Web执行](https://github.com/smallnest/go-web-framework-benchmark) 。如果要查看所有结果，请访问我们的[Wiki](https://docs.gofiber.io/benchmarks) 。
 
-![在这里插入图片描述](golang-web%E6%A1%86%E6%9E%B6fiber.assets/30d648ee390b8807ebffa832a4299a55.png)![img](golang-web%E6%A1%86%E6%9E%B6fiber.assets/aefeb591907ea9fa8519950bcc293179.png)
+![在这里插入图片描述](../.gitbook/assets/30d648ee390b8807ebffa832a4299a55.png)
+![img](../.gitbook/assets/aefeb591907ea9fa8519950bcc293179.png)
 
 ## 🎯 特点
 
@@ -468,7 +469,7 @@ This is a list of middlewares that are created by the Fiber community, please cr
 
 ## ‎‍💻 贡献者GITHUB头像
 
-![Code Contributors](golang-web%E6%A1%86%E6%9E%B6fiber.assets/contributors.svg)
+![Code Contributors](../.gitbook/assets/contributors.svg)
 
 ## ⚠️ MIT书
 
