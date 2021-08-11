@@ -20,4 +20,5 @@
 
 
 ## python
-* [wav 音频分割](./python/wav音频分割.md)
+* [wav 音频分割](./python/audio-wav-slice-by-pydub.md)
+* [读取 .cfg配置文件](./python/read-cfg-file-by-configparser.md)
