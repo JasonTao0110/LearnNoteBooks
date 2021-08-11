@@ -1,4 +1,5 @@
 # Initial page
+简介：
 
-<p style="color:#FF0000;font-weight:bold;">golang 学习笔记</p>
+学习笔记  杂章    随记
 
