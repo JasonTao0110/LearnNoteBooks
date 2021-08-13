@@ -4,7 +4,7 @@
 
 > ConfigParser 是用来读取配置文件的包。配置文件的格式如下：中括号“\[ \]”内包含的为section。section 下面为类似于key-value 的配置内容。
 
-```text
+```ini
 [db]
 db_host = 127.0.0.1
 db_port = 69
@@ -21,10 +21,8 @@ processor = 20
 ## 二、ConfigParser 初始化对象
 
 > 使用ConfigParser 首选需要初始化实例，并读取配置文件：
->
-> \`\`\`python import configparser config = configparser.ConfigParser\(\) config.read\("ini", encoding="utf-8"\)
 
-```text
+
 ### 三、ConfigParser 常用方法
 
 #### 1、获取所用的section节点
