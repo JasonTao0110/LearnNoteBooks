@@ -20,7 +20,6 @@
 * [NSQ](xiao-xi-zhong-jian-jian/nsq.md)
 
 ## python
-<<<<<<< HEAD
 * [wav 音频分割](./python/audio-wav-slice-by-pydub.md)
 * [读取 .cfg配置文件](./python/read-cfg-file-by-configparser.md)
 * [sched 定时任务](./python/sched-timed-task.md)
@@ -28,9 +27,4 @@
 
 ## 运维
 * [Kubernetes](./OperationMaintenance/kubernetes.md)
-=======
-
-* [wav 音频分割](python/audio-wav-slice-by-pydub.md)
-* [读取 .cfg配置文件](python/read-cfg-file-by-configparser.md)
-
->>>>>>> 9dc718294c76bf1517d349f7fbeaf2ecca6d2403
+* [主机名映射(hostname/从yaml到k8s容器)](./OperationMaintenance/yamlMapHostname.md)
