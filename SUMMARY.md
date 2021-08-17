@@ -15,10 +15,11 @@
 * [golang前端框架]()
   * [go-fiber](./goLearn/golang-web-fiber.md)
   * [go-gin](./goLearn/golang-web-gin.cn.md)
+* [golang爬虫框架colly](./goLearn/golang-spider-colly.md)
 
 ## 消息中间件
 
-* [NSQ](xiao-xi-zhong-jian-jian/nsq.md)
+* [NSQ](./messageQueue/nsq.md)
 
 ## python
 * [wav 音频分割](./python/audio-wav-slice-by-pydub.md)
