@@ -7,7 +7,7 @@
 * [golang简介]()
   * [go项目目录结构](./goLearn/golang-project-dir.md)
 * [golang基础用法]()
-  * [golang学习](./goLearn/learnGoLang.pdf) 
+  * [golang学习]() 
   * [golang基础](./goLearn/golang.md)
 * [golang高级用法]()
 * [golang版本管理]()
