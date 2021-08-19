@@ -23,7 +23,7 @@
 # solve
 # 待开启开启字段  "update_time"
 
-PUT gdwj_prod/_mapping
+PUT my_index/_mapping
 {
     "properties":{
         "update_time":{
