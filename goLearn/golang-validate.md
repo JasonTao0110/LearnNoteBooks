@@ -209,9 +209,13 @@ func main() {
 运行输出：
 
 >   go run simple1.go
+> 
 >   Key: '' Error:Field validation for '' failed on the 'required' tag
+> 
 >   Key: '' Error:Field validation for '' failed on the 'required' tag
+> 
 >   success
+> 
 >   Key: '' Error:Field validation for '' failed on the 'email' tag
 >
 >   End!!
@@ -302,17 +306,27 @@ func validateVariable() {
 运行 输出：
 
 >	Namespace: User.Address[0].Phone
+>	
 >	Field: Phone
+>	
 >	StructNamespace: User.Address[0].Phone
+>	
 >	StructField: Phone
+>	
 >	Tag: numeric
+>	
 >	ActualTag: numeric
+>	
 >	Kind: string
+>	
 >	Type: string
+>	
 >	Value: 13366663333x
+>	
 >	Param: 
 >	
 >	结构体输入数据类型错误！
+>	
 >	变量校验通过！
 
 
@@ -364,7 +378,9 @@ func main() {
 运行输出：
 
 >   $ go run validate_slice.go
+> 
 >   Key: '[0]' Error:Field validation for '[0]' failed on the 'min' tag
+> 
 >   Key: '' Error:Field validation for '' failed on the 'min' tag
 
 说明：
@@ -388,14 +404,21 @@ validate.Var(slicethree, "min=2,dive,dive,required")
 说明：
 
 >   这里有2个 dive，刚好深入到二维slice，但他们也有不同之处，第二个表达式的第一个dive后没有设置tag。
+> 
 >   第一个验证表达式：
+> 
 >   min=2：验证第一个 [] 方括号的值长度 ;
+> 
 >   len=2：验证第二个 []string 长度;
+> 
 >   required：验证slice里的值
-
+>	
 >   第二个验证表达式：
+> 
 >   min=2：验证第一个 [] 方括号的值长度 ;
+> 
 >   dive： 后没有设置tag值，**不验证第二个 []string** ;
+> 
 >   required： 验证slice里的值
 
 #### map[#](https://www.cnblogs.com/jiujuan/p/13823864.html#1069513055)
@@ -429,15 +452,21 @@ func main() {
 运行输出：
 
 >   $ go run validate_map.go
+> 
 >   Key: '[three]' Error:Field validation for '[three]' failed on the 'eq=1|eq=3' tag
+> 
 >   Key: '[three]' Error:Field validation for '[three]' failed on the 'required' tag
+> 
 >   Key: '[one]' Error:Field validation for '[one]' failed on the 'eq=1|eq=3' tag
+> 
 >   Key: '[two]' Error:Field validation for '[two]' failed on the 'eq=1|eq=3' tag
 
 说明：
 
 >   gte=3：验证map自己的长度；
+> 
 >   dive后的 keys,eq=1|eq=2,endkeys：验证map的keys个数，也就是验证 [] 里值。上例中定义了一个string，所以明显报了3个错误。
+> 
 >   required：验证 map的值value
 
 **那嵌套map怎么验证**？
@@ -451,7 +480,9 @@ validate.Var(maptwo, "gte=3,dive,keys,dive,eq=1|eq=3,endkeys,required")
 说明：
 
 >   gte=3： 验证map的长度；
+> 
 >   keys,dive,eq=1|eq=3,endkeys：keys和endkeys中有一个dive(深入一级)，验证map中key的数组每一个值
+> 
 >   required： 验证map的值
 
 ### 用户自定义函数验证[#](https://www.cnblogs.com/jiujuan/p/13823864.html#1499208663)
@@ -518,11 +549,17 @@ func CustomerValidationFunc(f1 validator.FieldLevel) bool {
 运行输出：
 
 >   $ go run customer.go
+> 
 >   first value: &{jimmy 86}
+> 
 >   Err(s):
+> 
 >   Key: 'User.Age' Error:Field validation for 'Age' failed on the 'lte' tag
+> 
 >   second value: &{tom 29}
+> 
 >   Err(s):
+> 
 >   Key: 'User.Name' Error:Field validation for 'Name' failed on the 'CustomerValidation' tag
 
 **注意**：
@@ -590,7 +627,10 @@ func UserStructLevelValidation(sl validator.StructLevel) {
 运行输出：
 
 >   $ go run customer1.go
->   Key: 'User.FirstName' Error:Field validation for 'FirstName' failed on the 'firstname' tag
+> 
+>   Key: 'User.FirstName' Error:Field 
+> validation for 'FirstName' failed on the 'firstname' tag
+> 
 >   Key: 'User.LastName' Error:Field validation for 'LastName' failed on the 'lastname' tag
 
 ### 例子5：自定义函数-直接注册函数2[#](https://www.cnblogs.com/jiujuan/p/13823864.html#235801207)
@@ -651,8 +691,11 @@ func ValidateValuer(field reflect.Value) interface{} {
 运行输出：
 
 >   $ go run customer.go
+> 
 >   Err(s):
+> 
 >   Key: 'DbBackedUser.Name' Error:Field validation for 'Name' failed on the 'required' tag
+> 
 >   Key: 'DbBackedUser.Age' Error:Field validation for 'Age' failed on the 'required' tag
 
 **注意，这个函数**：
@@ -718,10 +761,13 @@ func main() {
 运行输出：
 
 >   $ go run verify_pwd.go
+> 
 >   validate user1 value: {jim 123456 12345}
+> 
 >   Key: 'User.UserName' Error:Field validation for 'UserName' failed on the 'gte' tag
+> 
 >   Key: 'User.Password2' Error:Field validation for 'Password2' failed on the 'eqfield' tag
->   ====================
+>  
 >   validate user2 value: {jimy 123456 123456}
 
 **还有一种是2变量字段比较**，见下面例子 eq_field.go:
@@ -762,10 +808,13 @@ func main() {
 运行输出：
 
 >   $ go run eq_field.go
+> 
 >   tag nefield:
+> 
 >   correct
->   ===========================
+>  
 >   tag eqfield:
+> 
 >   Key: '' Error:Field validation for '' failed on the 'eqfield' tag
 
 ### 例子7：翻译/自定义字段错误[#](https://www.cnblogs.com/jiujuan/p/13823864.html#4062359490)
@@ -837,6 +886,7 @@ func removeStructName(fields map[string]string) map[string]string {
 运行输出：
 
 >   $ go run customer_err_info3.go
+> 
 >   map[Age:Age必须小于或等于30 Email:Email必须是一个有效的邮箱]
 
 ## 五、参考[#](https://www.cnblogs.com/jiujuan/p/13823864.html#1289164731)
