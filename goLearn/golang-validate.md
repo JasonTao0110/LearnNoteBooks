@@ -301,19 +301,19 @@ func validateVariable() {
 
 运行 输出：
 
-> Namespace: User.Address[0].Phone
-> Field: Phone
-> StructNamespace: User.Address[0].Phone
-> StructField: Phone
-> Tag: numeric
-> ActualTag: numeric
-> Kind: string
-> Type: string
-> Value: 13366663333x
-> Param: 
-> 
-> 结构体输入数据类型错误！
-> 变量校验通过！
+>	Namespace: User.Address[0].Phone
+>	Field: Phone
+>	StructNamespace: User.Address[0].Phone
+>	StructField: Phone
+>	Tag: numeric
+>	ActualTag: numeric
+>	Kind: string
+>	Type: string
+>	Value: 13366663333x
+>	Param: 
+>	
+>	结构体输入数据类型错误！
+>	变量校验通过！
 
 
 还可以给字段加一些其他tag信息，方面form，json的解析，如下：
