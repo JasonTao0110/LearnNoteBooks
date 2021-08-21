@@ -223,106 +223,98 @@ func main() {
 validation_struct.go，这个程序还列出了效验出错字段的一些信息，
 
 ```go
-Copypackage main
+package main
 
 import (
 	"fmt"
-
-	"github.com/go-playground/validator/v10"
+	"github.com/go-playground/validator"
 )
 
-type User struct {
-	FirstName string     `validate:"required"`
-	LastName  string     `validate:"required"`
-	Age       uint8      `validate:"gte=0,lte=130"`
-	Email     string     `validate:"required,email"`
-	Addresses []*Address `validate:"required,dive,required"`
-}
+var validate *validator.Validate //定义
 
+type User struct {
+	Name  string `validate:"required"`       //非空
+	Age   uint8  `validate:"gte=0,lte=130"`  //  0<=Age<=130
+	Email string `validate:"required,email"` //非空，email格式
+	//dive关键字代表 进入到嵌套结构体进行判断
+	Address []*Address `validate:"dive"` //  可以拥有多个地址
+}
 type Address struct {
-	Street string `validate:"required"`
-	City   string `validate:"required"`
-	Planet string `validate:"required"`
-	Phone  string `validate:"required"`
+	Province string `validate:"required"`       //非空
+	City     string `validate:"required"`       //非空
+	Phone    string `validate:"numeric,len=11"` //数字类型，长度为11
 }
 
 func main() {
-	address := &Address{
-		Street: "Eavesdown Docks",
-		Planet: "Persphone",
-		Phone:  "none",
+	validate = validator.New() //初始化（赋值）
+	validateStruct()           //结构体校验
+	validateVariable()         //变量校验
+}
+func validateStruct() {
+	address := Address{
+		Province: "重庆",
+		City:     "重庆",
+		Phone:    "13366663333x",
 	}
-
-	user := &User{
-		FirstName: "Badger",
-		LastName:  "Smith",
-		Age:       135,
-		Email:     "Badger.Smith@gmail.com",
-		Addresses: []*Address{address},
+	user := User{
+		Name:    "江洲",
+		Age:     23,
+		Email:   "jz@163.com",
+		Address: []*Address{&address},
 	}
-
-	validate := validator.New()
 	err := validate.Struct(user)
 	if err != nil {
-		fmt.Println("=== error msg ====")
-		fmt.Println(err)
-
-		if _, ok := err.(*validator.InvalidValidationError); ok {
-			fmt.Println(err)
-			return
-		}
-
-		fmt.Println("\r\n=========== error field info ====================")
-		for _, err := range err.(validator.ValidationErrors) {
-           // 列出效验出错字段的信息
-			fmt.Println("Namespace: ", err.Namespace())
-			fmt.Println("Fild: ", err.Field())
-			fmt.Println("StructNamespace: ", err.StructNamespace())
-			fmt.Println("StructField: ", err.StructField())
-			fmt.Println("Tag: ", err.Tag())
-			fmt.Println("ActualTag: ", err.ActualTag())
-			fmt.Println("Kind: ", err.Kind())
-			fmt.Println("Type: ", err.Type())
-			fmt.Println("Value: ", err.Value())
-			fmt.Println("Param: ", err.Param())
+		//断言为：validator.ValidationErrors，类型为：[]FieldError
+		for _, e := range err.(validator.ValidationErrors) {
+			fmt.Println("Namespace:", e.Namespace())
+			fmt.Println("Field:", e.Field())
+			fmt.Println("StructNamespace:", e.StructNamespace())
+			fmt.Println("StructField:", e.StructField())
+			fmt.Println("Tag:", e.Tag())
+			fmt.Println("ActualTag:", e.ActualTag())
+			fmt.Println("Kind:", e.Kind())
+			fmt.Println("Type:", e.Type())
+			fmt.Println("Value:", e.Value())
+			fmt.Println("Param:", e.Param())
 			fmt.Println()
 		}
 
-		// from here you can create your own error messages in whatever language you wish
+		fmt.Println("结构体输入数据类型错误！")
 		return
+	} else {
+		fmt.Println("结构体校验通过")
 	}
 }
+
+//变量校验
+func validateVariable() {
+	myEmail := "123@qq.com" //邮箱地址：xx@xx.com
+	err := validate.Var(myEmail, "required,email")
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("变量校验通过！")
+	}
+}
+
 ```
 
 运行 输出：
 
->   $ go run validation_struct.go
->   ================================= error msg ==============================
->   Key: 'User.Age' Error:Field validation for 'Age' failed on the 'lte' tag
->   Key: 'User.Addresses[0].City' Error:Field validation for 'City' failed on the 'required' tag
->
->   ============================================ error field info ==========================================================
->   Namespace: User.Age
->   Fild: Age
->   StructNamespace: User.Age
->   StructField: Age
->   Tag: lte
->   ActualTag: lte
->   Kind: uint8
->   Type: uint8
->   Value: 135
->   Param: 130
->
->   Namespace: User.Addresses[0].City
->   Fild: City
->   StructNamespace: User.Addresses[0].City
->   StructField: City
->   Tag: required
->   ActualTag: required
->   Kind: string
->   Type: string
->   Value:
->   Param:
+> Namespace: User.Address[0].Phone
+> Field: Phone
+> StructNamespace: User.Address[0].Phone
+> StructField: Phone
+> Tag: numeric
+> ActualTag: numeric
+> Kind: string
+> Type: string
+> Value: 13366663333x
+> Param: 
+> 
+> 结构体输入数据类型错误！
+> 变量校验通过！
+
 
 还可以给字段加一些其他tag信息，方面form，json的解析，如下：
 
