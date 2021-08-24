@@ -102,13 +102,13 @@ schedule.every(10).minutes.do(scrapy_task)
 # 每小时执行一次任务              
 schedule.every().hour.do(scrapy_task)
 # 每天在什么时间点执行一次任务    
-schedule.every().day.at('10:30').do(scrapy_task)
+schedule.every().day.at('10:30').do(scrapy_task) # 10:30  08:00   符合 HH:MM:SS 的格式
 # 每5-10分钟(随机)执行一次任务    
 schedule.every(5).to(10).minutes.do(scrapy_task)
 # 每周一执行一次任务              
 schedule.every().monday.do(scrapy_task)
 # 每周一什么时间点执行一次任务    
-schedule.every().monday.at('9:30').do(scrapy_task)
+schedule.every().monday.at('09:30').do(scrapy_task)
 # 每分钟在第17秒的时候执行任务    
 schedule.every().minute.at(':17').do(scrapy_task)
 
