@@ -1,8 +1,4 @@
 
-
-
-
-
 ## sched
 
 ```python
@@ -48,3 +44,76 @@ if __name__ == "__main__":
 
 ```
 
+
+## schedule
+```python
+
+import json
+from sys import stdout
+
+import schedule
+import time
+import datetime
+import requests
+from kafka import KafkaProducer
+
+import applib
+
+applib.load_svc_env()
+
+
+class Producer:
+    def __init__(self):
+        self.broker_list = []
+        self.topic = ""
+        self.producer = KafkaProducer(bootstrap_servers=self.broker_list)
+
+    def sent_success(self, *args, **kwargs):
+        print("sent_success：", args)
+        return args
+
+    def sent_error(self, *args, **kwargs):
+        print("sent_error：", args)
+        return args
+
+    def produce(self, value):
+        print(self.topic, self.broker_list)
+        # print(json.dumps(value).encode("utf-8"))
+        self.producer.send(topic=self.topic, value=json.dumps(value).encode("utf-8")). \
+            add_callback(self.sent_success).add_errback(self.sent_error)
+        time.sleep(2)
+
+        stdout.flush()
+
+
+def scrapy_task():
+    p = Producer()
+    print("I'm working scrapy ...", datetime.datetime.now())
+    p.produce(value={"site": "qq"})
+    time.sleep(2)
+    p.produce(value={"site": "iqiyi"})
+    time.sleep(2)
+    p.produce(value={"site": "mgtv"})
+
+
+
+# 每10分钟执行一次任务            
+schedule.every(10).minutes.do(scrapy_task)
+# 每小时执行一次任务              
+schedule.every().hour.do(scrapy_task)
+# 每天在什么时间点执行一次任务    
+schedule.every().day.at('10:30').do(scrapy_task)
+# 每5-10分钟(随机)执行一次任务    
+schedule.every(5).to(10).minutes.do(scrapy_task)
+# 每周一执行一次任务              
+schedule.every().monday.do(scrapy_task)
+# 每周一什么时间点执行一次任务    
+schedule.every().monday.at('9:30').do(scrapy_task)
+# 每分钟在第17秒的时候执行任务    
+schedule.every().minute.at(':17').do(scrapy_task)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+```
